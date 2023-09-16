@@ -1,6 +1,8 @@
 package org.crates.jon.abrams.app.distributedTransactions.controller;
 
 import org.crates.jon.abrams.app.distributedTransactions.service.TestService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app/v1")
 public class TestController {
 
+    private static final Logger log = LoggerFactory.getLogger(TestController.class);
     final TestService testService;
 
     public TestController(TestService testService) {
@@ -22,7 +25,8 @@ public class TestController {
 
     @GetMapping(value = "/import")
     public void imports() {
-        testService.getImport();
+        String anImport = testService.getInfo("xxxx");
+        log.info("------------- {}", anImport);
     }
 
 }

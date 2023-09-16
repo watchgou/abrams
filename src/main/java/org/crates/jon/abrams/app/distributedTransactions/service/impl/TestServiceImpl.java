@@ -16,4 +16,9 @@ public class TestServiceImpl implements TestService {
     public String getImport() {
         return "hello Mock";
     }
+
+    @Override
+    public String getInfo(String value) {
+        return "hello " + value;
+    }
 }

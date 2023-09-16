@@ -8,4 +8,6 @@ package org.crates.jon.abrams.app.distributedTransactions.service;
 public interface TestService {
 
     String getImport();
+
+    String getInfo(String value);
 }
