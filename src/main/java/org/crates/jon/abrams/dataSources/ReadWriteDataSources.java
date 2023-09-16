@@ -1,6 +1,6 @@
 package org.crates.jon.abrams.dataSources;
 
-import com.zaxxer.hikari.util.DriverDataSource;
+import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
 import org.apache.shardingsphere.infra.config.algorithm.AlgorithmConfiguration;
 import org.apache.shardingsphere.infra.config.mode.ModeConfiguration;
@@ -45,8 +45,7 @@ public class ReadWriteDataSources {
     public DataSource dataSource() throws SQLException {
 
 
-        return ShardingSphereDataSourceFactory.createDataSource(dataSourcesProperties.getDatabaseName(), StandaloneMode(),
-                dataSourceMap(), rule(), new Properties());
+        return ShardingSphereDataSourceFactory.createDataSource(dataSourcesProperties.getDatabaseName(), StandaloneMode(), dataSourceMap(), rule(), new Properties());
     }
 
 
@@ -60,9 +59,7 @@ public class ReadWriteDataSources {
         Collection<RuleConfiguration> rule = new LinkedList<>();
         ReadwriteSplittingRuleConfiguration shardingRuleConfiguration = new ReadwriteSplittingRuleConfiguration();
         Collection<ReadwriteSplittingDataSourceRuleConfiguration> dataSources = new LinkedList<>();
-        ReadwriteSplittingDataSourceRuleConfiguration readwriteSplittingDataSourceRuleConfiguration =
-                new ReadwriteSplittingDataSourceRuleConfiguration(dataSourcesProperties.getDatabaseName(), dataSourcesProperties.getReadWriteProp().getWriteDataSourceName()
-                        , dataSourcesProperties.getReadWriteProp().getReadDataSourceNames(), TransactionalReadQueryStrategy.PRIMARY, "random");
+        ReadwriteSplittingDataSourceRuleConfiguration readwriteSplittingDataSourceRuleConfiguration = new ReadwriteSplittingDataSourceRuleConfiguration(dataSourcesProperties.getDatabaseName(), dataSourcesProperties.getReadWriteProp().getWriteDataSourceName(), dataSourcesProperties.getReadWriteProp().getReadDataSourceNames(), TransactionalReadQueryStrategy.PRIMARY, "random");
         shardingRuleConfiguration.setDataSources(dataSources);
         Map<String, AlgorithmConfiguration> loadBalancers = new HashMap<>();
         AlgorithmConfiguration algorithmConfiguration = new AlgorithmConfiguration("RANDOM", new Properties());
@@ -76,8 +73,12 @@ public class ReadWriteDataSources {
     private Map<String, DataSource> dataSourceMap() {
         Map<String, DataSource> dataSourceMap = new HashMap<>();
         dataSourcesProperties.getShardingDataSources().forEach(ob -> {
-            DataSource dataSource = new DriverDataSource(ob.getUrl(), ob.getDriverClassName(), new Properties(), ob.getUsername(), ob.getPassword());
-            dataSourceMap.put(ob.getName(), dataSource);
+            DruidDataSource druidDataSource = new DruidDataSource();
+            druidDataSource.setUrl(ob.getUrl());
+            druidDataSource.setUsername(ob.getUsername());
+            druidDataSource.setPassword(ob.getPassword());
+            druidDataSource.setDriverClassName(ob.getDriverClassName());
+            dataSourceMap.put(ob.getName(), druidDataSource);
         });
         return dataSourceMap;
     }
