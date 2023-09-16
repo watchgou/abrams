@@ -11,7 +11,6 @@ import org.apache.shardingsphere.readwritesplitting.api.rule.ReadwriteSplittingD
 import org.apache.shardingsphere.readwritesplitting.api.transaction.TransactionalReadQueryStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
@@ -41,10 +40,8 @@ public class ReadWriteDataSources {
     }
 
 
-    @Bean
+    //@Bean
     public DataSource dataSource() throws SQLException {
-
-
         return ShardingSphereDataSourceFactory.createDataSource(readWriteProperties.getDatabaseName(), StandaloneMode(), dataSourceMap(), rule(), new Properties());
     }
 
