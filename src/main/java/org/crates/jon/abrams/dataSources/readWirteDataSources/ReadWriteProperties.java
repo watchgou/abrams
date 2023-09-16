@@ -11,8 +11,8 @@ import java.util.List;
  */
 
 @Configuration
-@ConfigurationProperties(prefix = "sharding.sphere")
-public class DataSourcesProperties {
+@ConfigurationProperties(prefix = "readWrite.sphere")
+public class ReadWriteProperties {
 
     private String databaseName;
 

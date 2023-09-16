@@ -33,11 +33,11 @@ public class ReadWriteDataSources {
     private static final Logger log = LoggerFactory.getLogger(ReadWriteDataSources.class);
 
 
-    final DataSourcesProperties dataSourcesProperties;
+    final ReadWriteProperties readWriteProperties;
 
 
-    public ReadWriteDataSources(DataSourcesProperties dataSourcesProperties) {
-        this.dataSourcesProperties = dataSourcesProperties;
+    public ReadWriteDataSources(ReadWriteProperties readWriteProperties) {
+        this.readWriteProperties = readWriteProperties;
     }
 
 
@@ -45,7 +45,7 @@ public class ReadWriteDataSources {
     public DataSource dataSource() throws SQLException {
 
 
-        return ShardingSphereDataSourceFactory.createDataSource(dataSourcesProperties.getDatabaseName(), StandaloneMode(), dataSourceMap(), rule(), new Properties());
+        return ShardingSphereDataSourceFactory.createDataSource(readWriteProperties.getDatabaseName(), StandaloneMode(), dataSourceMap(), rule(), new Properties());
     }
 
 
@@ -59,7 +59,7 @@ public class ReadWriteDataSources {
         Collection<RuleConfiguration> rule = new LinkedList<>();
         ReadwriteSplittingRuleConfiguration shardingRuleConfiguration = new ReadwriteSplittingRuleConfiguration();
         Collection<ReadwriteSplittingDataSourceRuleConfiguration> dataSources = new LinkedList<>();
-        ReadwriteSplittingDataSourceRuleConfiguration readwriteSplittingDataSourceRuleConfiguration = new ReadwriteSplittingDataSourceRuleConfiguration(dataSourcesProperties.getDatabaseName(), dataSourcesProperties.getReadWriteProp().getWriteDataSourceName(), dataSourcesProperties.getReadWriteProp().getReadDataSourceNames(), TransactionalReadQueryStrategy.PRIMARY, "random");
+        ReadwriteSplittingDataSourceRuleConfiguration readwriteSplittingDataSourceRuleConfiguration = new ReadwriteSplittingDataSourceRuleConfiguration(readWriteProperties.getDatabaseName(), readWriteProperties.getReadWriteProp().getWriteDataSourceName(), readWriteProperties.getReadWriteProp().getReadDataSourceNames(), TransactionalReadQueryStrategy.PRIMARY, "random");
         shardingRuleConfiguration.setDataSources(dataSources);
         Map<String, AlgorithmConfiguration> loadBalancers = new HashMap<>();
         AlgorithmConfiguration algorithmConfiguration = new AlgorithmConfiguration("RANDOM", new Properties());
@@ -72,7 +72,7 @@ public class ReadWriteDataSources {
 
     private Map<String, DataSource> dataSourceMap() {
         Map<String, DataSource> dataSourceMap = new HashMap<>();
-        dataSourcesProperties.getShardingDataSources().forEach(ob -> {
+        readWriteProperties.getShardingDataSources().forEach(ob -> {
             DruidDataSource druidDataSource = new DruidDataSource();
             druidDataSource.setUrl(ob.getUrl());
             druidDataSource.setUsername(ob.getUsername());
