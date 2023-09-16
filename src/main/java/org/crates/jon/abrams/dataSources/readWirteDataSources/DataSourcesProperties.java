@@ -1,4 +1,4 @@
-package org.crates.jon.abrams.dataSources;
+package org.crates.jon.abrams.dataSources.readWirteDataSources;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

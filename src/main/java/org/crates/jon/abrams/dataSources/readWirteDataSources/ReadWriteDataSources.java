@@ -1,4 +1,4 @@
-package org.crates.jon.abrams.dataSources;
+package org.crates.jon.abrams.dataSources.readWirteDataSources;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
@@ -33,7 +33,7 @@ public class ReadWriteDataSources {
     private static final Logger log = LoggerFactory.getLogger(ReadWriteDataSources.class);
 
 
-    private final DataSourcesProperties dataSourcesProperties;
+    final DataSourcesProperties dataSourcesProperties;
 
 
     public ReadWriteDataSources(DataSourcesProperties dataSourcesProperties) {
