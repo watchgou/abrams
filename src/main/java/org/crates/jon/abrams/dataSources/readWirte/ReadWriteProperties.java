@@ -1,4 +1,4 @@
-package org.crates.jon.abrams.dataSources.readWirteDataSources;
+package org.crates.jon.abrams.dataSources.readWirte;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 @Configuration
-@ConfigurationProperties(prefix = "readWrite.sphere")
+@ConfigurationProperties(prefix = "read-write.sphere")
 public class ReadWriteProperties {
 
     private String databaseName;

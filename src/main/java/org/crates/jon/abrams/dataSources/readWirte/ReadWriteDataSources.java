@@ -1,4 +1,4 @@
-package org.crates.jon.abrams.dataSources.readWirteDataSources;
+package org.crates.jon.abrams.dataSources.readWirte;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;

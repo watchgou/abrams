@@ -1,15 +1,14 @@
-package org.crates.jon.abrams.dataSources.shardingDataSources;
+package org.crates.jon.abrams.dataSources.sharding;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author jon
  * @date 2023/9/16
  */
 
-@Configuration
+//@Configuration
 public class ShardingDataSources {
 
     private static final Logger log = LoggerFactory.getLogger(ShardingDataSources.class);
