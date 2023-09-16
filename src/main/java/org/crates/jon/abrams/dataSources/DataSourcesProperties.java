@@ -44,15 +44,6 @@ public class DataSourcesProperties {
         this.shardingDataSources = shardingDataSources;
     }
 
-    @Override
-    public String toString() {
-        return "DataSourcesProperties{" +
-                "databaseName='" + databaseName + '\'' +
-                ", readWriteProp=" + readWriteProp +
-                ", shardingDataSources=" + shardingDataSources +
-                '}';
-    }
-
 
     public static class ReadWritePro {
 
@@ -78,13 +69,6 @@ public class DataSourcesProperties {
             this.readDataSourceNames = readDataSourceNames;
         }
 
-        @Override
-        public String toString() {
-            return "ReadWritePro{" +
-                    "writeDataSourceName='" + writeDataSourceName + '\'' +
-                    ", readDataSourceNames=" + readDataSourceNames +
-                    '}';
-        }
     }
 
     public static class ShardingDataSources {
@@ -138,16 +122,6 @@ public class DataSourcesProperties {
             this.password = password;
         }
 
-        @Override
-        public String toString() {
-            return "ShardingDataSources{" +
-                    "name='" + name + '\'' +
-                    ", driverClassName='" + driverClassName + '\'' +
-                    ", url='" + url + '\'' +
-                    ", username='" + username + '\'' +
-                    ", password='" + password + '\'' +
-                    '}';
-        }
     }
 
 
