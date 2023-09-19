@@ -12,7 +12,9 @@ RUN mkdir ./config
 
 ADD ./build/libs/abrams-1.0.0.jar ./
 
-ADD ./config/* ./config
+ADD ./config/application.yml ./config
+
+ADD ./config/bootstrap.properties ./config
 
 EXPOSE 7080
 
