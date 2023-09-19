@@ -2,15 +2,21 @@ FROM openjdk:17-oracle
 
 ENV TZ=Asia/Shanghai
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && mkdir -p /server-java
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && mkdir -p /apps
 
-WORKDIR /server-java
+WORKDIR /apps
 
 RUN mkdir ./logs
 
-EXPOSE 7080
+RUN mkdir ./config
 
 ADD ./build/libs/abrams-1.0.0.jar ./
+
+ADD ./config/* ./config
+
+EXPOSE 7080
+
+
 
 ENV JAVA_MEM_OPTS="-XX:MinHeapSize=128m -XX:InitialHeapSize=128m -XX:MaxHeapSize=256m -XX:SoftMaxHeapSize=256m"
 
