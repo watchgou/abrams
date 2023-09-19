@@ -5,5 +5,7 @@ package org.crates.jon.abrams.app;
  * @date 2023/9/17
  */
 
-public class Main {
+public class WebMvcConfig {
+
+
 }
