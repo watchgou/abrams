@@ -57,8 +57,10 @@ public class ReadWriteDataSources {
         Collection<RuleConfiguration> rule = new LinkedList<>();
         ReadwriteSplittingRuleConfiguration shardingRuleConfiguration = new ReadwriteSplittingRuleConfiguration();
         Collection<ReadwriteSplittingDataSourceRuleConfiguration> dataSources = new LinkedList<>();
-        ReadwriteSplittingDataSourceRuleConfiguration readwriteSplittingDataSourceRuleConfiguration = new ReadwriteSplittingDataSourceRuleConfiguration(readWriteProperties.getDatabaseName(), readWriteProperties.getReadWriteProp().getWriteDataSourceName(), readWriteProperties.getReadWriteProp().getReadDataSourceNames(), TransactionalReadQueryStrategy.PRIMARY, "random");
+        ReadwriteSplittingDataSourceRuleConfiguration readwriteSplittingDataSourceRuleConfiguration =
+                new ReadwriteSplittingDataSourceRuleConfiguration(readWriteProperties.getDatabaseName(), readWriteProperties.getReadWriteProp().getWriteDataSourceName(), readWriteProperties.getReadWriteProp().getReadDataSourceNames(), TransactionalReadQueryStrategy.PRIMARY, "random");
         shardingRuleConfiguration.setDataSources(dataSources);
+        dataSources.add(readwriteSplittingDataSourceRuleConfiguration);
         Map<String, AlgorithmConfiguration> loadBalancers = new HashMap<>();
         AlgorithmConfiguration algorithmConfiguration = new AlgorithmConfiguration("RANDOM", new Properties());
         loadBalancers.put("random", algorithmConfiguration);
